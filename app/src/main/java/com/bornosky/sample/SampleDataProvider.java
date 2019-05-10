@@ -13,9 +13,9 @@ public class SampleDataProvider {
         dataItemList = new ArrayList<>();
 
         addItem(new StudentInfo("CEO", "1", "01818306782"));
-        addItem(new StudentInfo("Project Manager", "2", "01778299530"));
-        addItem(new StudentInfo("Sagir Ahamid Sir", "3", "01971308099"));
-        addItem(new StudentInfo("Nahid Bhai", "4", "01914467257"));
+        addItem(new StudentInfo("Manager", "2", "01778299530"));
+        addItem(new StudentInfo("Ahamid", "3", "01971308099"));
+        addItem(new StudentInfo("Nahid", "4", "01914467257"));
         addItem(new StudentInfo("P Soft", "5", "01997647130"));
       /*  addItem(new StudentInfo("Anisur Islam", "3", "0817712732712"));
         addItem(new StudentInfo("Nayon Islam", "4", "0917712732712"));
