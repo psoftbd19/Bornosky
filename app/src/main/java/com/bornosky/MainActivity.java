@@ -1,46 +1,91 @@
 package com.bornosky;
 
-import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import com.bornosky.view.fragment.Message;
+import com.bornosky.view.fragment.Notification;
+
+public class MainActivity extends AppCompatActivity {
+
+
+    TabLayout tabLayout;
+    ViewPager viewPager;
+    static int pageNumber = 2;
+    static Fragment googleFragment,cnnFragment;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById();
+    }
 
-        findViewById(R.id.btnIndividualSMS).setOnClickListener(this);
-        findViewById(R.id.btnAbsentSMS).setOnClickListener(this);
-        findViewById(R.id.btnSMSForAllStudents).setOnClickListener(this);
-        findViewById(R.id.btnTeachersSMS).setOnClickListener(this);
+    private void findViewById() {
+
+        tabLayout = (TabLayout)findViewById(R.id.tablayout);
+        viewPager = (ViewPager)findViewById(R.id.viewpager);
+        googleFragment = new Message();
+        cnnFragment = new Notification();
+        viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
+
+        tabLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                tabLayout.setupWithViewPager(viewPager);
+               /* tabLayout.getTabAt(0).setText("GOOGLE");
+                tabLayout.getTabAt(1).setText("APPLE");
+                tabLayout.getTabAt(2).setText("CNN");*/
+            }
+        });
 
     }
 
-    @Override
-    public void onClick(View v) {
+    class  MyAdapter extends FragmentPagerAdapter{
 
-
-        int id = v.getId();
-        switch (id) {
-            case R.id.btnIndividualSMS:
-                startActivity(new Intent(this, IndividualSMSActivity.class));
-                break;
-            case R.id.btnAbsentSMS:
-                Toast.makeText(this, "Absent sms", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btnSMSForAllStudents:
-                Toast.makeText(this, "SMS for all sms", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btnTeachersSMS:
-                Toast.makeText(this, "Teachers sms", Toast.LENGTH_SHORT).show();
-                break;
+        public MyAdapter(FragmentManager fm) {
+            super(fm);
         }
 
+        @Override
+        public Fragment getItem(int position) {
+
+            if(position == 0){
+                return  googleFragment;
+            }
+            if(position == 1){
+                return  cnnFragment;
+            }
+
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return pageNumber;
+        }
+
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+
+            if(position == 0){
+                return  "Message";
+            }
+            if(position == 1){
+                return  "Notification";
+            }
+
+
+            return super.getPageTitle(position);
+        }
     }
+
+
 }
