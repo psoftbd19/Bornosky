@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     ViewPager viewPager;
     static int pageNumber = 2;
-    static Fragment googleFragment,cnnFragment;
-
+    static Fragment messageFragment, notificationFragment;
+    int mAge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,10 +29,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void findViewById() {
 
-        tabLayout = (TabLayout)findViewById(R.id.tablayout);
-        viewPager = (ViewPager)findViewById(R.id.viewpager);
-        googleFragment = new Message();
-        cnnFragment = new Notification();
+        tabLayout = (TabLayout) findViewById(R.id.tablayout);
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        messageFragment = new Message();
+        notificationFragment = new Notification();
         viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
 
         tabLayout.post(new Runnable() {
@@ -47,7 +47,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    class  MyAdapter extends FragmentPagerAdapter{
+
+    class MyAdapter extends FragmentPagerAdapter {
 
         public MyAdapter(FragmentManager fm) {
             super(fm);
@@ -56,11 +57,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
 
-            if(position == 0){
-                return  googleFragment;
+            if (position == 0) {
+                return messageFragment;
+
             }
-            if(position == 1){
-                return  cnnFragment;
+            if (position == 1) {
+                return notificationFragment;
             }
 
             return null;
@@ -75,13 +77,13 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
 
-            if(position == 0){
-                return  "Message";
-            }
-            if(position == 1){
-                return  "Notification";
-            }
+            if (position == 0) {
+                return "Message";
 
+            }
+            if (position == 1) {
+                return "Notification";
+            }
 
             return super.getPageTitle(position);
         }

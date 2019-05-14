@@ -1,6 +1,5 @@
 package com.bornosky.view.activity;
 
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -23,8 +22,7 @@ import com.bornosky.sample.SampleDataProvider;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IndividualSMS extends AppCompatActivity {
-
+public class AbsentMessage extends AppCompatActivity {
 
     private Spinner spinnerSession, spinnerBranch, spinnerClass, spinnerShift, spinnerSection, spinnerMessageType;
 
@@ -45,9 +43,8 @@ public class IndividualSMS extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_individual_sms);
-        setTitle("IndividualMessage");
-
+        setContentView(R.layout.absent_message);
+        setTitle("Absent Message");
 
         spinnerSession = (Spinner) findViewById(R.id.spinnerSession);
         spinnerBranch = (Spinner) findViewById(R.id.spinnerBranch);
@@ -71,7 +68,7 @@ public class IndividualSMS extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String s1 = String.valueOf(spinnerSession.getSelectedItem());
                 if (!s1.contentEquals("Select session")) {
-                    ArrayAdapter<String> branchAdapter = new ArrayAdapter<>(IndividualSMS.this, R.layout.spinner_item, branchArray);
+                    ArrayAdapter<String> branchAdapter = new ArrayAdapter<>(AbsentMessage.this, R.layout.spinner_item, branchArray);
                     branchAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     branchAdapter.notifyDataSetChanged();
                     spinnerBranch.setAdapter(branchAdapter);
@@ -81,7 +78,7 @@ public class IndividualSMS extends AppCompatActivity {
                         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                             String s1 = String.valueOf(spinnerBranch.getSelectedItem());
                             if (!s1.contentEquals("Select Branch")) {
-                                ArrayAdapter<String> classAdapter = new ArrayAdapter<>(IndividualSMS.this, R.layout.spinner_item, classArray);
+                                ArrayAdapter<String> classAdapter = new ArrayAdapter<>(AbsentMessage.this, R.layout.spinner_item, classArray);
                                 spinnerClass.setAdapter(classAdapter);
 
                                 spinnerClass.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -89,7 +86,7 @@ public class IndividualSMS extends AppCompatActivity {
                                     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                         String s1 = String.valueOf(spinnerClass.getSelectedItem());
                                         if (!s1.contentEquals("Select class")) {
-                                            ArrayAdapter<String> shiftAdapter = new ArrayAdapter<>(IndividualSMS.this, R.layout.spinner_item, shiftArray);
+                                            ArrayAdapter<String> shiftAdapter = new ArrayAdapter<>(AbsentMessage.this, R.layout.spinner_item, shiftArray);
                                             spinnerShift.setAdapter(shiftAdapter);
 
                                             spinnerShift.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -97,14 +94,14 @@ public class IndividualSMS extends AppCompatActivity {
                                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                     String s1 = String.valueOf(spinnerShift.getSelectedItem());
                                                     if (!s1.contentEquals("Select shift")) {
-                                                        ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(IndividualSMS.this, R.layout.spinner_item, sectionArray);
+                                                        ArrayAdapter<String> sectionAdapter = new ArrayAdapter<>(AbsentMessage.this, R.layout.spinner_item, sectionArray);
                                                         spinnerSection.setAdapter(sectionAdapter);
                                                         spinnerSection.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                             @Override
                                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                                 String s1 = String.valueOf(spinnerSection.getSelectedItem());
                                                                 if (!s1.contentEquals("Select section")) {
-                                                                    ArrayAdapter<String> messageTypeAdapter = new ArrayAdapter<>(IndividualSMS.this, R.layout.spinner_item, messageTypeArray);
+                                                                    ArrayAdapter<String> messageTypeAdapter = new ArrayAdapter<>(AbsentMessage.this, R.layout.spinner_item, messageTypeArray);
                                                                     spinnerMessageType.setAdapter(messageTypeAdapter);
                                                                     spinnerMessageType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                                                         @Override
@@ -187,7 +184,7 @@ public class IndividualSMS extends AppCompatActivity {
                         checkedAllPhoneList.add(dataItemList.get(i).getPhone());
 
                     }
-                    DataItemAdapter adapter = new DataItemAdapter(IndividualSMS.this, dataItemList);
+                    DataItemAdapter adapter = new DataItemAdapter(AbsentMessage.this, dataItemList);
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvItems);
                     recyclerView.setAdapter(adapter);
                 } else {
@@ -196,7 +193,7 @@ public class IndividualSMS extends AppCompatActivity {
                         dataItemList.get(i).setChecked(false);
                         checkedAllPhoneList.clear();
                     }
-                    DataItemAdapter adapter = new DataItemAdapter(IndividualSMS.this, dataItemList);
+                    DataItemAdapter adapter = new DataItemAdapter(AbsentMessage.this, dataItemList);
                     RecyclerView recyclerView = (RecyclerView) findViewById(R.id.rvItems);
                     recyclerView.setAdapter(adapter);
                 }
@@ -211,7 +208,7 @@ public class IndividualSMS extends AppCompatActivity {
                 checkedPhoneList = DataItemAdapter.phones;
                 if (checkedPhoneList.size() > 0) {
                     for (int i = 0; i < checkedPhoneList.size(); i++) {
-                        Toast.makeText(IndividualSMS.this, "your number " + checkedPhoneList.get(i), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AbsentMessage.this, "your number " + checkedPhoneList.get(i), Toast.LENGTH_SHORT).show();
                         SmsManager sms = SmsManager.getDefault();
                         message = etmessage.getText().toString();
 
@@ -226,7 +223,7 @@ public class IndividualSMS extends AppCompatActivity {
                 }
                 if (checkedAllPhoneList.size() > 0) {
                     for (int i = 0; i < checkedAllPhoneList.size(); i++) {
-                        Toast.makeText(IndividualSMS.this, "your number " + checkedAllPhoneList.get(i), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AbsentMessage.this, "your number " + checkedAllPhoneList.get(i), Toast.LENGTH_SHORT).show();
                         SmsManager sms = SmsManager.getDefault();
                         message = etmessage.getText().toString();
 
