@@ -14,6 +14,17 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".view.activity.Welcome"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.activity.signin"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.activity.signup"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
             android:name=".view.activity.GoverningBody"
             android:parentActivityName=".MainActivity">
             <meta-data
@@ -98,7 +109,7 @@
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.activity.Splash"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
